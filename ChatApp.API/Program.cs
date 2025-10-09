@@ -1,10 +1,11 @@
 
-using ChatApp.Application;
-using ChatApp.Domain.Interfaces;
-using ChatApp.Infrastructure.Data;
-using ChatApp.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
+using Chat_Application.Configurations;
+//using ChatApp.Application;
+//using ChatApp.Domain.Interfaces;
+//using ChatApp.Infrastructure.Data;
+//using ChatApp.Infrastructure.Repositories;
+//using Microsoft.EntityFrameworkCore;
+//using System;
 
 namespace ChatAppAPI
 {
@@ -13,22 +14,13 @@ namespace ChatAppAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            
+            // Configurations
+            builder.Services.ConfigureJwtToken(builder.Configuration);    // JWT Configuration
+            builder.Services.ExternalConfiguration(builder.Configuration); // SignalR, MediatR and Swagger Configurations
 
-            // Register MediatR
-            builder.Services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(typeof(ApplicationAssembly).Assembly));
-
-            // Add SIgnalR
-            builder.Services.AddSignalR();
-
-            // Register repositories
-            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
-
-            // Add DbContext
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("CS")));
-
+            
             // Add services to the container.
             builder.Services.AddControllers();
 
@@ -50,6 +42,9 @@ namespace ChatAppAPI
             app.UseAuthorization();
 
             app.MapControllers();
+
+            //SignalR
+            //app.MapHub<hub>("/notificationHub");
 
             app.Run();
         }

@@ -12,7 +12,7 @@ namespace ChatApp.Domain.Entities
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public DateTime LastSeenAt { get; set; }
-        public bool IsOnline { get; set; }
+        public bool IsOnline { get; set; } = false;
 
         // Navigation properties
         public ICollection<Message> Messages { get; set; }

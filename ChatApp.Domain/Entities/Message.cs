@@ -12,8 +12,8 @@ namespace ChatApp.Domain.Entities
         public string UserId { get; set; }
         public string RoomId { get; set; }
         public string MessageText { get; set; }
-        public bool IsEdited { get; set; }
-        public MessageType MessageType { get; set; }
+        public bool IsEdited { get; set; } = false;
+        public MessageType MessageType { get; set; } = 0;
 
         // Navigation properties
         public User User { get; set; }

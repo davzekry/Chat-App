@@ -16,7 +16,7 @@ namespace ChatApp.Domain.Entities
         public MessageType MessageType { get; set; } = 0;
 
         // Navigation properties
-        public User User { get; set; }
+        public AppUser User { get; set; }
         public Room Room { get; set; }
         public FileMessage FileMessage { get; set; }
         public VoiceMessage VoiceMessage { get; set; }

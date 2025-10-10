@@ -7,10 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Entity1\Commands\" />
-    <Folder Include="Handlers\Entity1\DTOs\" />
-    <Folder Include="Handlers\Entity1\Validators\" />
-    <Folder Include="Handlers\Entity1\Queries\" />
+    <Folder Include="Handlers\Messages\DTOs\" />
+    <Folder Include="Handlers\Messages\Validators\" />
+    <Folder Include="Handlers\Messages\Queries\" />
+    <Folder Include="Handlers\Messages\Commands\" />
+    <Folder Include="Handlers\RoomMembers\Commands\" />
+    <Folder Include="Handlers\RoomMembers\DTOs\" />
+    <Folder Include="Handlers\RoomMembers\Queries\" />
+    <Folder Include="Handlers\RoomMembers\Validators\" />
+    <Folder Include="Handlers\Rooms\Commands\" />
+    <Folder Include="Handlers\Rooms\DTOs\" />
+    <Folder Include="Handlers\Rooms\Queries\" />
+    <Folder Include="Handlers\Rooms\Validators\" />
+    <Folder Include="Handlers\Users\Commands\" />
+    <Folder Include="Handlers\Users\DTOs\" />
+    <Folder Include="Handlers\Users\Queries\" />
+    <Folder Include="Handlers\Users\Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="MediatR" Version="13.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChatApp.Domain\ChatApp.Domain.csproj" />
+    <ProjectReference Include="..\ChatApp.Infrastructure\ChatApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

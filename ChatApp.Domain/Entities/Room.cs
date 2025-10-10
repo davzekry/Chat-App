@@ -16,7 +16,7 @@ namespace ChatApp.Domain.Entities
         public bool IsActive { get; set; }
 
         // Navigation properties
-        public User CreatedByUser { get; set; }
+        public AppUser CreatedByUser { get; set; }
         public ICollection<Message> Messages { get; set; }
         public ICollection<RoomMember> RoomMembers { get; set; }
 

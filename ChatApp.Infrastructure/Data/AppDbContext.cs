@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using ChatApp.Domain.Entities;
 using ChatApp.Infrastructure.Data.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FileMessage = ChatApp.Domain.Entities.FileMessage;
 
 namespace ChatApp.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt) { }
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<RoomMember> RoomMembers { get; set; }

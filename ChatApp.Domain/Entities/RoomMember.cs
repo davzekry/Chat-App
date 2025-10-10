@@ -16,6 +16,6 @@ namespace ChatApp.Domain.Entities
 
         // Navigation properties
         public Room Room { get; set; }
-        public User User { get; set; }
+        public AppUser User { get; set; }
     }
 }

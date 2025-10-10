@@ -4,14 +4,14 @@ using ChatApp.Domain.Entities;
 
 namespace ChatApp.Infrastructure.Data.Configurations
 {
-    public class UserConfiguration : BaseEntityConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<AppUser>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Id).ValueGeneratedOnAdd();
 
-            builder.Property(u => u.Username)
+            builder.Property(u => u.UserName)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -20,26 +20,26 @@ namespace ChatApp.Infrastructure.Data.Configurations
                 .HasMaxLength(100);
 
             builder.HasIndex(u => u.Email).IsUnique();
-            builder.HasIndex(u => u.Username).IsUnique();
+            builder.HasIndex(u => u.UserName).IsUnique();
 
-            builder.Property(u => u.PasswordHash)
-                .IsRequired()
-                .HasMaxLength(256);
+            //builder.Property(u => u.Password)
+            //    .IsRequired()
+            //    .HasMaxLength(256);
 
             builder.Property(u => u.CreatedAt)
                 .IsRequired();
 
-            builder.Property(u => u.LastSeenAt)
-                .IsRequired();
+            //builder.Property(u => u.LastSeenAt)
+            //    .IsRequired();
 
             builder.Property(u => u.IsOnline)
                 .IsRequired();
 
             // New BaseEntity properties
-            //builder.Property(u => u.UpdatedAt);
-            //builder.Property(u => u.IsDeleted)
-            //    .IsRequired();
-            //builder.Property(u => u.DeletedAt);
+            builder.Property(u => u.UpdatedAt);
+            builder.Property(u => u.IsDeleted)
+                .IsRequired();
+            builder.Property(u => u.DeletedAt);
 
             // Relationships
             builder.HasMany(u => u.Messages)

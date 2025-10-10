@@ -1,5 +1,6 @@
 
 using Chat_Application.Configurations;
+using EGRideAPI.API.Configuration;
 //using ChatApp.Application;
 //using ChatApp.Domain.Interfaces;
 //using ChatApp.Infrastructure.Data;
@@ -14,9 +15,10 @@ namespace ChatAppAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
-            
+
+
             // Configurations
+            builder.Services.ConfigureIdentity(builder.Configuration);    // Identity Configuration
             builder.Services.ConfigureJwtToken(builder.Configuration);    // JWT Configuration
             builder.Services.ExternalConfiguration(builder.Configuration); // SignalR, MediatR and Swagger Configurations
 

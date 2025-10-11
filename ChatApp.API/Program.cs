@@ -1,5 +1,6 @@
 
 using Chat_Application.Configurations;
+using Chat_Application.Hubs;
 using EGRideAPI.API.Configuration;
 //using ChatApp.Application;
 //using ChatApp.Domain.Interfaces;
@@ -46,7 +47,7 @@ namespace ChatAppAPI
             app.MapControllers();
 
             //SignalR
-            //app.MapHub<hub>("/notificationHub");
+            app.MapHub<Chathub>("/Chathub");
 
             app.Run();
         }

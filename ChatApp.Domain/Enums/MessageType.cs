@@ -9,9 +9,7 @@ namespace ChatApp.Domain.Enums
     public enum MessageType
     {
         Text = 0,
-        Image = 1,
-        Pdf = 2,
+        file = 1,
         Audio = 3,
-        System = 4
     }
 }

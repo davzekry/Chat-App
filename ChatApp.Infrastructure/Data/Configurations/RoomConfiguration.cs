@@ -16,8 +16,8 @@ namespace ChatApp.Infrastructure.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(r => r.Description)
-                .HasMaxLength(500);
+            builder.Property(r => r.ImagePath)
+                .HasMaxLength(600);
 
             builder.Property(r => r.RoomType)
                 .IsRequired()

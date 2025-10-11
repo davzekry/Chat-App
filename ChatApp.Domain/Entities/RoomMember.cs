@@ -11,8 +11,7 @@ namespace ChatApp.Domain.Entities
         public string RoomId { get; set; }
         public string UserId { get; set; }
         public DateTime JoinedAt { get; set; }
-        public DateTime LastReadAt { get; set; }
-        public bool IsActive { get; set; }
+
 
         // Navigation properties
         public Room Room { get; set; }

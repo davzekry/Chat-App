@@ -9,16 +9,16 @@ namespace ChatApp.Domain.Entities
 {
     public class Room : BaseEntity
     {
-        public string RoomName { get; set; }
-        public string? Description { get; set; }
+        public string? RoomName { get; set; }
+        public string? ImagePath { get; set; }
         public RoomType RoomType { get; set; } = 0;
-        public string CreatedByUserId { get; set; }
-        public bool IsActive { get; set; }
+        public string? CreatedByUserId { get; set; }
+        //public bool IsActive { get; set; }
 
         // Navigation properties
         public AppUser CreatedByUser { get; set; }
-        public ICollection<Message> Messages { get; set; }
-        public ICollection<RoomMember> RoomMembers { get; set; }
+        public ICollection<Message>? Messages { get; set; }
+        public ICollection<RoomMember>? RoomMembers { get; set; }
 
         public Room()
         {

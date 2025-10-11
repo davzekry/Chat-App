@@ -21,11 +21,6 @@ namespace ChatApp.Infrastructure.Data.Configurations
             builder.Property(rm => rm.JoinedAt)
                 .IsRequired();
 
-            builder.Property(rm => rm.LastReadAt)
-                .IsRequired();
-
-            builder.Property(rm => rm.IsActive)
-                .IsRequired();
 
             // New BaseEntity properties
             //builder.Property(rm => rm.UpdatedAt);

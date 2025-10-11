@@ -19,9 +19,9 @@ namespace ChatApp.Infrastructure.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(255);
 
-            builder.Property(fm => fm.FileType)
-                .IsRequired()
-                .HasMaxLength(50);
+            //builder.Property(fm => fm.FileType)
+            //    .IsRequired()
+            //    .HasMaxLength(50);
 
             builder.Property(fm => fm.FilePath)
                 .IsRequired()

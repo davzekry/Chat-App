@@ -8,9 +8,7 @@ using ChatApp.Domain.Entities;
 
 namespace ChatApp.Domain.Interfaces
 {
-    public interface IGenericRepository<T>
-        where T : BaseEntity
-
+    public interface IAppUserRepository<T> where T : AppUser
     {
         IQueryable<T> GetAll(bool track = false);
 
@@ -36,6 +34,5 @@ namespace ChatApp.Domain.Interfaces
         Task<T?> GetSingleAsync(Expression<Func<T, bool>> predicate);
 
         Task SaveChangesAsync();
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ChatApp.Application;
+using ChatApp.Domain.Entities;
 using ChatApp.Domain.Interfaces;
 using ChatApp.Infrastructure.Data;
 using ChatApp.Infrastructure.Repositories;
@@ -17,6 +18,7 @@ namespace Chat_Application.Configurations
 
             // Register repositories
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IAppUserRepository<AppUser>), typeof(AppUserRepository<AppUser>));
 
 
             // Add DbContext

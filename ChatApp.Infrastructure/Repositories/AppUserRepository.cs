@@ -12,12 +12,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChatApp.Infrastructure.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class AppUserRepository<T> : IAppUserRepository<T> where T : AppUser
     {
         private readonly AppDbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        public GenericRepository(AppDbContext context )
+        public AppUserRepository(AppDbContext context)
         {
             this._context = context;
             _dbSet = context.Set<T>();

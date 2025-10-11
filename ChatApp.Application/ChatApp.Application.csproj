@@ -7,21 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Messages\DTOs\" />
-    <Folder Include="Handlers\Messages\Validators\" />
-    <Folder Include="Handlers\Messages\Queries\" />
-    <Folder Include="Handlers\Messages\Commands\" />
-    <Folder Include="Handlers\RoomMembers\Commands\" />
     <Folder Include="Handlers\RoomMembers\DTOs\" />
     <Folder Include="Handlers\RoomMembers\Queries\" />
     <Folder Include="Handlers\RoomMembers\Validators\" />
     <Folder Include="Handlers\Rooms\Commands\" />
-    <Folder Include="Handlers\Rooms\DTOs\" />
-    <Folder Include="Handlers\Rooms\Queries\" />
     <Folder Include="Handlers\Rooms\Validators\" />
     <Folder Include="Handlers\Users\Commands\" />
-    <Folder Include="Handlers\Users\DTOs\" />
-    <Folder Include="Handlers\Users\Queries\" />
     <Folder Include="Handlers\Users\Validators\" />
   </ItemGroup>
 
@@ -29,6 +20,8 @@
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>

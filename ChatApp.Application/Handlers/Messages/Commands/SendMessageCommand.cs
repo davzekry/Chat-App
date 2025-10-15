@@ -59,8 +59,8 @@ namespace ChatApp.Application.Handlers.Messages.Commands
             // Create base message entity
             var message = new Message
             {
-                UserId = request.UserId,
-                RoomId = request.RoomId,
+                UserId = request.UserId ?? string.Empty,
+                RoomId = request.RoomId ?? string.Empty,
                 MessageText = request.MessageText,
                 MessageType = request.MessageType,
                 CreatedAt = DateTime.UtcNow
@@ -132,11 +132,14 @@ namespace ChatApp.Application.Handlers.Messages.Commands
                 MessageType = message.MessageType.ToString(),
                 FilePath = filePath,
                 AudioFilePath = audioPath,
-                CreatedAt = message.CreatedAt
+                CreatedAt = message.CreatedAt,
+                UserName = message.User.UserName,
+                UserProfileImage = message.User.ImagePath
             };
 
-            await _hubContext.Clients.Group(request.RoomId)
-                .SendAsync("ReceiveMessage", broadcastPayload);
+            // Change this line in SendMessageCommandHandler.cs
+            await _hubContext.Clients.Group(request.RoomId.ToString()).SendAsync("ReceiveMessage", broadcastPayload, cancellationToken);
+
 
             return CustomeResponse<bool>.Success(true, "Message sent successfully.");
         }

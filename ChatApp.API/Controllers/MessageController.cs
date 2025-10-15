@@ -5,13 +5,15 @@ using ChatApp.Application.Handlers.Messages.Commands;
 using ChatApp.Application.Handlers.Messages.DTOs;
 using ChatApp.Application.Handlers.Messages.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chat_Application.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class MessageController : ControllerBase
     {
         private readonly IMediator _mediator;

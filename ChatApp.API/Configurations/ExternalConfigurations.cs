@@ -5,9 +5,6 @@ using ChatApp.Infrastructure.Data;
 using ChatApp.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-//using Microsoft.IdentityModel.Tokens;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
-//using System.Text;
 
 namespace Chat_Application.Configurations
 {
@@ -32,6 +29,20 @@ namespace Chat_Application.Configurations
 
             // Add SIgnalR
             services.AddSignalR();
+
+            // Cors Origin - MODIFIED HERE
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", // Changed policy name for clarity
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:4200", // Your Angular dev server
+                                           "https://dchatapp.runasp.net") // Your deployed backend domain, if it's also acting as a client or for Swagger UI access from browser
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials(); // Essential for JWT and SignalR
+                    });
+            });
 
             // Swagger
             services.AddEndpointsApiExplorer();

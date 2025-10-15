@@ -51,8 +51,11 @@ namespace ChatApp.Application.Handlers.Messages.Commands
             ValidationResult validationResult = await validationRules.ValidateAsync(request);
 
             if (!validationResult.IsValid)
-                return CustomeResponse<bool>.Fail("Validation failed in 'SendMessageCommand'.");
+            {
+                List<string> errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
 
+                return CustomeResponse<bool>.Fail($"Validation failed in 'SendMessageCommand'.\n{(string.Join(Environment.NewLine, errors))}");
+            }
             // Create base message entity
             var message = new Message
             {

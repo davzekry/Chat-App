@@ -1,13 +1,15 @@
 ﻿using ChatApp.Application.Common.Models;
 using ChatApp.Application.Handlers.RoomMembers.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chat_Application.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class RoomMemberController : ControllerBase
     {
         private readonly IMediator _mediator;

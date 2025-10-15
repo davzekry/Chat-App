@@ -18,7 +18,6 @@ namespace ChatApp.Application.Handlers.Rooms.Orchestrators
         [JsonIgnore]
         public string? CurrentUserId { get; set; }
         public string? UserId { get; set; }
-        public string? ImagePath { get; set; }
     }
 
 

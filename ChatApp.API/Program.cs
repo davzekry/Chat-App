@@ -1,13 +1,6 @@
-
 using Chat_Application.Configurations;
 using Chat_Application.Hubs;
 using EGRideAPI.API.Configuration;
-//using ChatApp.Application;
-//using ChatApp.Domain.Interfaces;
-//using ChatApp.Infrastructure.Data;
-//using ChatApp.Infrastructure.Repositories;
-//using Microsoft.EntityFrameworkCore;
-//using System;
 
 namespace ChatAppAPI
 {
@@ -17,13 +10,11 @@ namespace ChatAppAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
             // Configurations
             builder.Services.ConfigureIdentity(builder.Configuration);    // Identity Configuration
             builder.Services.ConfigureJwtToken(builder.Configuration);    // JWT Configuration
-            builder.Services.ExternalConfiguration(builder.Configuration); // SignalR, MediatR and Swagger Configurations
+            builder.Services.ExternalConfiguration(builder.Configuration); // SignalR, MediatR and Swagger, and CORS Configurations
 
-            
             // Add services to the container.
             builder.Services.AddControllers();
 
@@ -34,13 +25,22 @@ namespace ChatAppAPI
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //if (app.Environment.IsDevelopment()) // Re-evaluate if you want Swagger only in dev or always
+            //{
+            //}
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
+
+            // Add UseRouting here. This is important for CORS to work correctly.
+            // It might be implicitly handled by MapControllers/MapHub, but explicit is safer.
+            app.UseRouting();
+
+            // Apply the CORS policy AFTER UseRouting and BEFORE UseAuthentication/UseAuthorization
+            app.UseCors("AllowSpecificOrigin"); // Use the new policy name
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

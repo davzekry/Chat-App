@@ -10,11 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 using ChatApp.Application.Features.Rooms.Orchestrators;
 using ChatApp.Application.Handlers.Rooms.Queries;
 using ChatApp.Application.Handlers.Rooms.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Chat_Application.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class RoomController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -35,8 +37,8 @@ namespace Chat_Application.Controllers
             return await _mediator.Send(roomRequest);
         }
 
-        [HttpPost("create-group")]
-        public async Task<CustomeResponse<bool>> CreateGroup([FromBody] CreateGroupRoomOrchestrator request)
+        [HttpPost]
+        public async Task<CustomeResponse<bool>> CreateGroupRoom([FromBody] CreateGroupRoomOrchestrator request)
         {
             var AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (AppUserId == null)
@@ -46,8 +48,8 @@ namespace Chat_Application.Controllers
             return await _mediator.Send(request);
         }
 
-        [HttpGet("GetAllByUser")]
-        public async Task<CustomeResponse<List<DTO_GetAllRoomsByUserIdQuery>>> GetAllByUser()
+        [HttpGet]
+        public async Task<CustomeResponse<List<DTO_GetAllRoomsByUserIdQuery>>> GetAllRoomsByUserId()
         {
             var AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (AppUserId == null)

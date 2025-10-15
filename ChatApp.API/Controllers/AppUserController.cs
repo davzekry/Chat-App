@@ -4,13 +4,15 @@ using ChatApp.Application.Handlers.Users.DTOs;
 using ChatApp.Application.Handlers.Users.Queries;
 using ChatApp.Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chat_Application.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class AppUserController : ControllerBase
     {
         private readonly IMediator _mediator;

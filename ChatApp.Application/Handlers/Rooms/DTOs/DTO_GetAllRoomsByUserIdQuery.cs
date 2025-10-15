@@ -13,6 +13,7 @@ namespace ChatApp.Application.Handlers.Rooms.DTOs
         public string? RoomName { get; set; }
         public string? ImagePath { get; set; }
         public RoomType RoomType { get; set; }
-        public DateTime LastMessageAt { get; set; }   
+        public DateTime LastMessageAt { get; set; }
+        public List<DTO_MemberInfo>? Members { get; set; }
     }
 }

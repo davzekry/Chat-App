@@ -53,7 +53,13 @@ namespace ChatApp.Application.Handlers.Rooms.Queries
                     LastMessageAt = r.Messages
                         .OrderByDescending(m => m.CreatedAt)
                         .Select(m => m.CreatedAt)
-                        .FirstOrDefault()
+                        .FirstOrDefault(),
+                    Members = r.RoomMembers.Where(x=>x.UserId != request.UserId).Select(x => new DTO_MemberInfo
+                    {
+                        ID = x.Id,
+                        Name = x.User.UserName,
+                        ImagePath = x.User.ImagePath,
+                    }).ToList(),
                 })
                 .OrderByDescending(r => r.LastMessageAt)
                 .ToListAsync(cancellationToken);

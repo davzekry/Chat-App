@@ -69,12 +69,13 @@ namespace ChatApp.Application.Handlers.Rooms.Orchestrators
             if (result.Status != ResponseStatus.Success)
                 return CustomeResponse<DTO_CreatePrivateRoomCommand>.Fail("Room created but failed to add members");
 
-            var DTO_PrivateRoom = new DTO_CreatePrivateRoomCommand
+            var DTO_PrivateRoom = _roomRepository.FilterAll(x => x.Id == room.Id).Select(x => new DTO_CreatePrivateRoomCommand
             {
-                RoomId = room.Id,
+                RoomId = x.Id,
                 LastUpdated = DateTime.UtcNow,
-                MemberName = request.UserId,
-            };
+                MemberName = x.RoomMembers.Where(x => x.UserId == request.UserId).Select(y=>y.User.UserName).FirstOrDefault(),
+            }).FirstOrDefault();
+
             return CustomeResponse<DTO_CreatePrivateRoomCommand>.Success(DTO_PrivateRoom, "Private room created successfully");
         }
     }

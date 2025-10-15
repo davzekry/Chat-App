@@ -9,6 +9,7 @@ namespace ChatApp.Application.Handlers.Rooms.DTOs
     public class DTO_CreatePrivateRoomCommand
     {
         public string? RoomId { get; set; }
+        public string? MemberName { get; set; }
         public DateTime? LastUpdated { get; set; }
     }
 }

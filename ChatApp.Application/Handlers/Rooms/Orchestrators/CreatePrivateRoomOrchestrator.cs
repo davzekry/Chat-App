@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using ChatApp.Application.Common.Models;
 using ChatApp.Application.Handlers.RoomMembers.Commands;
+using ChatApp.Application.Handlers.Rooms.DTOs;
 using ChatApp.Domain.Entities;
 using ChatApp.Domain.Enums;
 using ChatApp.Domain.Interfaces;
@@ -13,7 +14,7 @@ using MediatR;
 
 namespace ChatApp.Application.Handlers.Rooms.Orchestrators
 {
-    public class CreatePrivateRoomOrchestrator : IRequest<CustomeResponse<bool>>
+    public class CreatePrivateRoomOrchestrator : IRequest<CustomeResponse<DTO_CreatePrivateRoomCommand>>
     {
         [JsonIgnore]
         public string? CurrentUserId { get; set; }
@@ -21,7 +22,7 @@ namespace ChatApp.Application.Handlers.Rooms.Orchestrators
     }
 
 
-    public class CreatePrivateRoomOrchestratorHandler : IRequestHandler<CreatePrivateRoomOrchestrator, CustomeResponse<bool>>
+    public class CreatePrivateRoomOrchestratorHandler : IRequestHandler<CreatePrivateRoomOrchestrator, CustomeResponse<DTO_CreatePrivateRoomCommand>>
     {
         private readonly IGenericRepository<Room> _roomRepository;
         private readonly IMediator _mediator;
@@ -34,7 +35,7 @@ namespace ChatApp.Application.Handlers.Rooms.Orchestrators
             _mediator = mediator;
         }
 
-        public async Task<CustomeResponse<bool>> Handle(CreatePrivateRoomOrchestrator request, CancellationToken cancellationToken)
+        public async Task<CustomeResponse<DTO_CreatePrivateRoomCommand>> Handle(CreatePrivateRoomOrchestrator request, CancellationToken cancellationToken)
         {
             // Step 1: Check if private room already exists between these two users
             var existingRoom = _roomRepository
@@ -45,7 +46,7 @@ namespace ChatApp.Application.Handlers.Rooms.Orchestrators
                 );
 
             if (existingRoom != null)
-                return CustomeResponse<bool>.Fail("Private room already exists between these users");
+                return CustomeResponse<DTO_CreatePrivateRoomCommand>.Fail("Private room already exists between these users");
 
             // Step 2: Create new private room
             var room = new Room
@@ -66,9 +67,9 @@ namespace ChatApp.Application.Handlers.Rooms.Orchestrators
 
             var result = await _mediator.Send(addMembersCommand, cancellationToken);
             if (result.Status != ResponseStatus.Success)
-                return CustomeResponse<bool>.Fail("Room created but failed to add members");
+                return CustomeResponse<DTO_CreatePrivateRoomCommand>.Fail("Room created but failed to add members");
 
-            return CustomeResponse<bool>.Success(true, "Private room created successfully");
+            return CustomeResponse<DTO_CreatePrivateRoomCommand>.Success(new DTO_CreatePrivateRoomCommand { RoomId = room.Id, LastUpdated = room.CreatedAt}, "Private room created successfully");
         }
     }
 }

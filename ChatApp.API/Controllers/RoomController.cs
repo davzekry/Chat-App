@@ -27,11 +27,11 @@ namespace Chat_Application.Controllers
         }
 
         [HttpPost]
-        public async Task<CustomeResponse<bool>> CreatePrivateRoom([FromBody]CreatePrivateRoomOrchestrator roomRequest)
+        public async Task<CustomeResponse<DTO_CreatePrivateRoomCommand>> CreatePrivateRoom([FromBody]CreatePrivateRoomOrchestrator roomRequest)
         {
             var AppUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (AppUserId == null)
-                return CustomeResponse<bool>.Error("User Id Not Found!!");
+                return CustomeResponse<DTO_CreatePrivateRoomCommand>.Error("User Id Not Found!!");
             
             roomRequest.CurrentUserId = AppUserId;
             return await _mediator.Send(roomRequest);
